@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CROQUIS | Daily Drawing Archive</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap">
+<style>
+:root{--ecru:#F1EFE9;--ink:#222120;--grey:#6B685F;--rule:#DDD9CF;--tile:#EFECE5;--fit:contain}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ecru)}
+body{color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-weight:400;line-height:1.7}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.in{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.band{background:#fff}
+.band.e{background:var(--ecru)}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:28px 0 20px;border-bottom:1px solid var(--rule);font-size:15px;letter-spacing:.02em}
+.bar small{font-size:13px;color:var(--grey);letter-spacing:.06em}
+.ttl{padding:60px 0 32px}
+.ttl h1{margin:0;font-weight:400;font-size:clamp(34px,5vw,46px);line-height:1.2}
+.ttl .jp{margin:14px 0 0;font-size:clamp(22px,3vw,28px)}
+.ttl .en{margin:10px 0 0;font-size:13px;color:var(--grey);letter-spacing:.05em}
+.ttl .tag{margin:6px 0 0;font-size:17px}
+.crumb{font-size:13px;letter-spacing:.06em;color:var(--grey);margin-bottom:14px}
+.hero{display:grid;gap:2px;height:clamp(260px,46vw,540px);border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);background:#fff}
+.hero.two{grid-template-columns:1fr 1fr}
+.hero button,.hero>img{display:block;width:100%;height:100%}
+.hero img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
+.hero.one img{object-fit:cover}
+.big{display:block;width:100%;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.06);background:#fff}
+.big img{display:block;width:100%;max-height:72vh;object-fit:contain}
+.big.broken img{display:none}
+.big.broken{min-height:160px}
+.cap0{margin:14px 0 0;padding-bottom:44px;font-size:13px;color:var(--grey);letter-spacing:.04em}
+.sec{padding:56px 0 28px}
+.sec h2{margin:0;font-weight:400;font-size:clamp(24px,3vw,30px)}
+.sec .sub{margin:4px 0 28px;font-size:15px;color:var(--grey)}
+.grid{display:grid;gap:28px 24px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.fig{display:block;width:100%}
+.frame{display:block;aspect-ratio:3/4;border-radius:18px;overflow:hidden;background:#F4F2EC;border:1px solid rgba(0,0,0,.06);position:relative}
+.frame img{width:100%;height:100%;object-fit:var(--fit);display:block}
+.frame.broken img{display:none}
+.frame.broken::after{content:'表示できません';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grey)}
+.meta{display:block;margin-top:12px;font-size:15px}
+.meta small{display:block;font-size:13px;color:var(--grey);letter-spacing:.03em}
+.more{display:block;margin:36px auto 0;min-height:44px;padding:0 32px;border:1px solid var(--rule);font-size:13px;letter-spacing:.12em;text-align:center}
+.more[hidden]{display:none}
+.studs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stu{display:block;width:100%;background:var(--tile);border-radius:6px;padding:18px 20px 16px}
+.stu:hover{background:#E6E2D7}
+.stu .n{display:block;font-size:30px;font-weight:300;line-height:1.3}
+.stu .c{display:block;margin-top:2px;font-size:13px;color:var(--grey);letter-spacing:.08em}
+.hm-row{display:flex;align-items:center;gap:16px;margin-bottom:4px}
+.hm-row>span{width:64px;flex:none;font-size:12px;color:var(--grey)}
+.hm{display:grid;grid-template-columns:repeat(31,1fr);gap:3px;flex:1}
+.hm i{display:block;aspect-ratio:1;background:#E9E5DB;border-radius:2px}
+.hm i.x{visibility:hidden}
+.note{font-size:12px;color:var(--grey)}
+.hr{border:0;border-top:1px solid var(--rule);margin:48px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{min-height:44px;padding:0 18px;border:1px solid var(--rule);font-size:13px;display:inline-flex;align-items:center}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:28px 0 40px;font-size:12px;letter-spacing:.08em;color:var(--grey)}
+#lb{position:fixed;inset:0;background:rgba(241,239,233,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;z-index:9}
+#lb[hidden]{display:none}
+#lb img{max-width:100%;max-height:76vh;object-fit:contain;background:#fff;border-radius:12px}
+#lb .lbbar{display:flex;gap:16px;align-items:center;font-size:13px;color:var(--grey)}
+#lb button{min-height:44px;min-width:44px;padding:0 14px;border:1px solid var(--rule);background:#fff;text-align:center}
+@media(max-width:700px){.g2{grid-template-columns:1fr}.g3,.g4{grid-template-columns:repeat(2,1fr)}.studs{grid-template-columns:repeat(2,1fr)}.hm-row>span{width:44px;font-size:10px}}
+</style>
+</head>
+<body>
+<div id="app"><div class="in"><p class="note" style="padding-top:48px">読み込み中…</p></div></div>
+<div id="lb" hidden>
+  <img id="lbImg" alt="" referrerpolicy="no-referrer">
+  <div class="lbbar"><button data-act="prev" aria-label="前の作品">‹</button><span id="lbCap"></span><button data-act="next" aria-label="次の作品">›</button><button data-act="close" aria-label="閉じる">×</button></div>
+</div>
+<script>
+var LOADED = false;
+function showErr_(msg) {
+  var a = document.getElementById('app');
+  if (a) a.innerHTML = '<div style="padding:32px;font:14px/1.7 sans-serif;color:#222">表示エラー: ' + String(msg).replace(/</g, '&lt;') + '</div>';
+}
+window.onerror = function (msg, src, line) { showErr_(msg + '（' + line + '行目）'); };
+setTimeout(function () { if (!LOADED) showErr_('データの読み込みに時間がかかっています。ページを再読み込みしてください。'); }, 20000);
+</script>
+<script>
+const HERO_FILE_ID = '';
+const IMAGE_FIT = 'contain';
+const RECENT_STEP = 6;
+const ACADEMIC_YEAR = 2026;   // 年度（4月始まり）。0にすると最初の作品の日付から自動で決める
+const MON = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+const NUM = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve'];
+document.documentElement.style.setProperty('--fit', IMAGE_FIT);
+const app = document.getElementById('app');
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+let DATA, ALL = [], BYID = {}, COUNT = {}, CUR = [], LB = 0, shown = RECENT_STEP;
+const THUMB = (id, w) => 'https://drive.google.com/thumbnail?sz=w' + w + '&id=' + id;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = d => d ? d.slice(0,4) + '.' + d.slice(4,6) + '.' + d.slice(6,8) : '';
+function ayStart() {
+  if (ACADEMIC_YEAR) return ACADEMIC_YEAR;
+  if (!ALL.length) return new Date().getFullYear();
+  const min = ALL[ALL.length - 1].d;
+  let y = +min.slice(0,4);
+  if (+min.slice(4,6) < 4) y--;
+  return y;
+}
+function fig(w, mode) {
+  const meta = mode === 'name' ? esc(w.s) + '<small>' + fmt(w.d) + '</small>' : '<small>' + fmt(w.d) + '</small>';
+  return '<button class="fig" data-act="open" data-id="' + w.id + '"><span class="frame"><img loading="lazy" referrerpolicy="no-referrer" src="' + THUMB(w.id,700) + '" alt="' + esc(w.s) + ' ' + fmt(w.d) + '" onerror="this.parentNode.classList.add(\'broken\')"></span><span class="meta">' + meta + '</span></button>';
+}
+function chip(code, val, text, cur) {
+  return '<button class="chip' + (val === cur ? ' on' : '') + '" data-act="month" data-code="' + code + '" data-month="' + val + '">' + text + '</button>';
+}
+function bar(ay) {
+  return '<div class="bar"><button data-act="home">FOREST CULTURE ACADEMY</button><small>' + ay + ' / ' + (ay + 1) + '</small></div>';
+}
+function foot() {
+  return '<div class="band e"><div class="in foot"><span>FOREST CULTURE ACADEMY / CROQUIS ARCHIVE</span><span>UPDATED ' + esc(DATA.updatedAt || '') + '</span></div></div>';
+}
+function init(d) {
+  DATA = d;
+  DATA.students.forEach(s => {
+    s.works = s.works.map(a => ({ id: a[0], d: a[1], t: a[2], s: s.label }));
+    s.works.forEach(w => { ALL.push(w); BYID[w.id] = w; COUNT[w.d] = (COUNT[w.d] || 0) + 1; });
+  });
+  ALL.sort((a, b) => (b.d + b.t).localeCompare(a.d + a.t));
+  renderHome();
+}
+function heroHtml() {
+  if (HERO_FILE_ID) return '<div class="hero one"><img referrerpolicy="no-referrer" src="' + THUMB(HERO_FILE_ID,1600) + '" alt=""></div>';
+  const a = ALL[0];
+  const b = ALL.find(w => w.s !== a.s);
+  const pick = b ? [a, b] : [a];
+  return '<div class="hero ' + (pick.length === 2 ? 'two' : 'one') + '">' + pick.map(w => '<button data-act="open" data-id="' + w.id + '"><img referrerpolicy="no-referrer" src="' + THUMB(w.id,1200) + '" alt="' + esc(w.s) + ' ' + fmt(w.d) + '"></button>').join('') + '</div>';
+}
+function yearStrip() {
+  const asc = ALL.slice().reverse(), n = asc.length;
+  const idx = n >= 3 ? [0, Math.floor((n - 1) / 2), n - 1] : asc.map((_, i) => i);
+  return idx.map(i => fig(asc[i], 'name')).join('');
+}
+function heatmap() {
+  const y = ayStart();
+  const max = Math.max.apply(null, Object.keys(COUNT).map(k => COUNT[k]));
+  let rows = '';
+  for (let k = 0; k < 12; k++) {
+    const mm = ((3 + k) % 12) + 1, yy = y + Math.floor((3 + k) / 12);
+    const days = new Date(yy, mm, 0).getDate();
+    let cells = '';
+    for (let day = 1; day <= 31; day++) {
+      if (day > days) { cells += '<i class="x"></i>'; continue; }
+      const key = '' + yy + String(mm).padStart(2,'0') + String(day).padStart(2,'0');
+      const c = COUNT[key] || 0;
+      const style = c ? ' style="background:rgba(34,33,32,' + (0.18 + 0.82 * (c / max)).toFixed(2) + ')"' : '';
+      cells += '<i title="' + yy + '.' + mm + '.' + day + ' : ' + c + '点"' + style + '></i>';
+    }
+    rows += '<div class="hm-row"><span>' + yy + '.' + String(mm).padStart(2,'0') + '</span><div class="hm">' + cells + '</div></div>';
+  }
+  return rows + '<p class="note">1日に提出された作品の数。濃いほど多い。</p>';
+}
+function studentTiles() {
+  return DATA.students.map(s => {
+    const big = /^Student \d+$/.test(s.label) ? s.label.slice(8) : s.label;
+    return '<button class="stu" data-act="student" data-code="' + s.code + '"><span class="n">' + esc(big) + '</span><span class="c">STUDENT · ' + s.works.length + ' WORKS</span></button>';
+  }).join('');
+}
+function renderRecent() {
+  CUR = ALL.slice(0, shown);
+  document.getElementById('rg').innerHTML = CUR.map(w => fig(w, 'name')).join('');
+  document.getElementById('moreBtn').hidden = shown >= ALL.length;
+}
+function renderHome() {
+  closeLb();
+  shown = RECENT_STEP;
+  if (!ALL.length) { app.innerHTML = '<div class="in"><p class="note" style="padding-top:48px">準備中です。</p></div>'; LOADED = true; return; }
+  const ay = ayStart();
+  app.innerHTML =
+    '<div class="band e"><div class="in">' + bar(ay) +
+      '<div class="ttl"><h1>CROQUIS</h1><p class="jp">毎日なにかを見て、なにかを描こう。</p><p class="en">DAILY DRAWING ARCHIVE</p><p class="tag">他人のつくったものをよく見よう。</p></div>' +
+      heroHtml() +
+      '<p class="cap0">' + ay + ' — STUDENT DRAWING PROJECT</p></div></div>' +
+    '<div class="band"><div class="in">' +
+      '<section class="sec"><h2>Recent Works</h2><p class="sub">最近の作品</p><div class="grid g2" id="rg"></div><button class="more" id="moreBtn" data-act="more">MORE</button></section>' +
+      '<section class="sec"><h2>The Students</h2><p class="sub">学生の制作記録</p><div class="studs">' + studentTiles() + '</div></section>' +
+      '<section class="sec"><h2>A Year of Drawing</h2><p class="sub">毎日の積み重ねを、年間の記録として。</p><div class="grid g3">' + yearStrip() + '</div><div style="margin-top:48px">' + heatmap() + '</div></section>' +
+    '</div></div>' + foot();
+  renderRecent();
+  window.scrollTo(0, 0);
+  LOADED = true;
+}
+function grp(title, ym, arr) {
+  return '<div><h2>' + title + '</h2><p class="sub">' + MON[+ym.slice(4) - 1] + ' ' + ym.slice(0,4) + '</p><div class="grid g2">' + arr.map(w => fig(w, 'date')).join('') + '</div></div>';
+}
+function renderStudent(code, month) {
+  closeLb();
+  const s = DATA.students.find(x => x.code === code);
+  const ws = s.works;
+  const ay = ayStart();
+  if (!ws.length) {
+    app.innerHTML = '<div class="band e"><div class="in">' + bar(ay) + '<div class="ttl"><div class="crumb"><button data-act="home">CROQUIS ARCHIVE</button> / ' + esc(s.label.toUpperCase()) + '</div><h1>' + esc(s.label) + '</h1><p class="en">まだ作品がありません。</p></div></div></div>' + foot();
+    return;
+  }
+  const first = ws[0], last = ws[ws.length - 1];
+  const fym = first.d.slice(0,6), lym = last.d.slice(0,6);
+  const begin = ws.filter(w => w.d.slice(0,6) === fym).slice(0, 2);
+  const later = fym !== lym ? ws.filter(w => w.d.slice(0,6) === lym).slice(-2) : [];
+  const n = (+lym.slice(0,4) - +fym.slice(0,4)) * 12 + (+lym.slice(4) - +fym.slice(4));
+  const laterTitle = (NUM[n] || n) + ' Month' + (n > 1 ? 's' : '') + ' Later';
+  const days = new Set(ws.map(w => w.d)).size;
+  const list = month === 'ALL' ? ws : ws.filter(w => w.d.slice(0,6) === month);
+  CUR = list;
+  const yms = Array.from(new Set(ws.map(w => w.d.slice(0,6))));
+  app.innerHTML =
+    '<div class="band e"><div class="in">' + bar(ay) +
+      '<div class="ttl"><div class="crumb"><button data-act="home">CROQUIS ARCHIVE</button> / ' + esc(s.label.toUpperCase()) + '</div><h1>' + esc(s.label) + '</h1><p class="en">' + first.d.slice(0,4) + ' — DAILY DRAWING</p><p class="en">' + ws.length + ' WORKS / ' + days + ' DAYS</p></div>' +
+      '<button class="big" data-act="open" data-id="' + last.id + '"><img referrerpolicy="no-referrer" src="' + THUMB(last.id,1400) + '" alt="" onerror="this.parentNode.classList.add(\'broken\')"></button>' +
+      '<p class="cap0">毎日の観察と描画の記録</p></div></div>' +
+    '<div class="band"><div class="in">' +
+      '<section class="sec">' + grp('The Beginning', fym, begin) + (later.length ? '<hr class="hr">' + grp(laterTitle, lym, later) : '') + '</section>' +
+      '<section class="sec"><h2>Archive</h2><p class="sub">制作の記録</p>' +
+        '<div class="chips">' + chip(code,'ALL','ALL',month) + yms.map(ym => chip(code, ym, ym.slice(0,4) + '.' + ym.slice(4), month)).join('') + '</div>' +
+        '<div class="grid g4">' + list.map(w => fig(w, 'date')).join('') + '</div></section>' +
+    '</div></div>' + foot();
+  window.scrollTo(0, 0);
+}
+function showLb() {
+  const w = CUR[LB];
+  lbImg.src = THUMB(w.id, 1600);
+  lbImg.alt = w.s + ' ' + fmt(w.d);
+  lbCap.textContent = fmt(w.d) + '  ' + w.s;
+  lb.hidden = false;
+}
+function openLb(id) {
+  let i = CUR.findIndex(w => w.id === id);
+  if (i < 0) { if (!BYID[id]) return; CUR = [BYID[id]]; i = 0; }
+  LB = i; showLb();
+}
+function closeLb() { lb.hidden = true; lbImg.removeAttribute('src'); }
+function step(n) { LB = (LB + n + CUR.length) % CUR.length; showLb(); }
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act]');
+  if (!t) return;
+  const a = t.dataset.act;
+  if (a === 'home') renderHome();
+  else if (a === 'student') renderStudent(t.dataset.code, 'ALL');
+  else if (a === 'month') renderStudent(t.dataset.code, t.dataset.month);
+  else if (a === 'more') { shown += RECENT_STEP; renderRecent(); }
+  else if (a === 'open') openLb(t.dataset.id);
+  else if (a === 'prev') step(-1);
+  else if (a === 'next') step(1);
+  else if (a === 'close') closeLb();
+});
+document.addEventListener('keydown', e => {
+  if (lb.hidden) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+fetch('./gallery-index.json?t=' + Date.now(), { cache: 'no-store' })
+  .then(function (res) {
+    if (!res.ok) throw new Error('データファイルが見つかりません（HTTP ' + res.status + '）');
+    return res.json();
+  })
+  .then(function (d) { init(d); })
+  .catch(function (e) { showErr_('データを読み込めませんでした。' + (e && e.message ? e.message : '')); });
+</script>
+</body>
+</html>
